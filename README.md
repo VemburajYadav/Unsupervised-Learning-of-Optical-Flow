@@ -1,5 +1,7 @@
 # Self Supervised Learning of Optical Flow from Camera Images
- This repository contains a **PyTorch** re-implementation of the [UnFlow](https://arxiv.org/abs/1711.07837) and [PWC-Net](https://arxiv.org/abs/1709.02371) architectures for self supervised learning of optical flow with various common loss functions in the literature.
+ This repository contains a **PyTorch** re-implementation of the [UnFlow](https://arxiv.org/abs/1711.07837) and [PWC-Net](https://arxiv.org/abs/1709.02371) architectures for self supervised learning of optical flow with various common loss functions in the literature. This project is a part of my Student Research Project (Studienarbeit in German) at TU Brausnchweig.
+ - [Report](https://www.dropbox.com/s/lvaspcfctch56d2/Report_Studienarbeit.pdf?dl=0) for the project
+ - [Slides](https://www.dropbox.com/scl/fi/i1ccevxyr6kb7nutibshl/Self-Supervised-Learning-of-Optical-Flow.pptx?dl=0&rlkey=2ka00njicngya8w2gyf3twk3g) of the final presentation
  
 ## Requirements
 The following packages need to installed for the execution of the training, evaluation and inference scripts.
