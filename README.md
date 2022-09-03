@@ -1,10 +1,10 @@
 # Self Supervised Learning of Optical Flow from Camera Images
- This repository contains a **PyTorch** re-implementation of the [UnFlow](https://arxiv.org/abs/1711.07837) and [PWC-Net](https://arxiv.org/abs/1709.02371) architectures for self supervised learning of optical flow with various common loss functions in the literature. This project is a part of my Student Research Project (Studienarbeit in German) at TU Brausnchweig.
+ **PyTorch** implementations of the [UnFlow](https://arxiv.org/abs/1711.07837) and [PWC-Net](https://arxiv.org/abs/1709.02371) architectures for self supervised learning of optical flow put together with various loss functions in the recent literature. This work is a part of my Student Research Project (Studienarbeit in German) at TU Brausnchweig.
  - [Report](https://www.dropbox.com/s/lvaspcfctch56d2/Report_Studienarbeit.pdf?dl=0) for the project
  - [Slides](https://www.dropbox.com/scl/fi/i1ccevxyr6kb7nutibshl/Self-Supervised-Learning-of-Optical-Flow.pptx?dl=0&rlkey=2ka00njicngya8w2gyf3twk3g) of the final presentation
  
 ## Requirements
-The following packages need to installed for the execution of the training, evaluation and inference scripts.
+The following packages need to be installed for execution of the training, evaluation and inference scripts.
 - PyTorch 1.3
 - Tensorboard
 - scikit-image
@@ -16,16 +16,16 @@ The following packages need to installed for the execution of the training, eval
 ```
 1. Base Directory of the Project
    - src 
-     This directory contains the implementation of the network architectures, unsupervised losses, correlation layer, evaluation and inference scripts
+     This directory contains implementations of the network architectures, unsupervised losses, correlation layer, evaluation and inference scripts
    - DataLOaders
-     Contains DataLoaders specific to each dataset
+     Holds DataLoaders specific to each dataset
    - log
-     Directory for storing the training logs, intermediate checkpoints during during training. The training runs are separated by name of experiments.
+     Directory for storing the training logs, intermediate checkpoints during training. The training runs are separated by name of experiments.
      - name_of_the_experiment_1
        - train (contains event files to visualise training errors in tensorboard)
        - eval (contains event files to visualise validation errors during training) 
        - Intermediate_CKPTS (directory to store checkpoints at specific intervals during training)
-       - Final_CKPTs (directory to save the last checkpoint at end of training)
+       - Final_CKPTs (directory to save the last checkpoint at the end of training)
      - name_pf_the_experiment_2
      - name_of_the_experiment_3
 ```
@@ -42,11 +42,11 @@ python3 inference.py --experiment C_KITTI
                      --save_idr ./
 ```
 
-- **experiment**:  ``` name_of_experiment``` to load the checkpoint from for evaluation. For example  ```C_KITTI ```. The checkpoint from directory ``` log/name_of_experiment/Final_CKPTs/``` corresponding to latest __step index__ would be used for estimating the flow.  
+- **experiment**:  ``` name_of_experiment``` from which to load the checkpoint for evaluation. For example  ```C_KITTI ```. The checkpoint from directory ``` log/name_of_experiment/Final_CKPTs/``` corresponding to latest __step index__ would be used for estimating the flow.  
 - **arch**: ```C``` or ```CS``` or ```CSS```
 - **img_1_path**: Path to the first frame relative to the base directory of the project.
 - **img_2_path**: Path to the second frame relative to the base directory of the project.
-- **save_dir**: Path to the directory relative to the base directory of the project for saving the flow output and it's color code visualisation.If the directory doesn't exist_exist, it will be created. Two files will be written: 
+- **save_dir**: Path to the directory relative to the base directory of the project for saving the flow output and it's color code visualisation. If the specified directory doesn't exist, it will be created. Two files will be written: 
   - **flow.npy**: Optical flow output stored as an numpy array of soze **H x W x 2**
   - **flow_vis.png**: Color coded RGB image of optical flow visualisation. 
   
@@ -62,7 +62,7 @@ python3 eval.py --experiment C_KITTI
                 --save_dir ./C_KITTI_2015
 ```
 
-- **experiment**:  ``` name_of_experiment``` to load the checkpoint from for evaluation. For example  ```C_KITTI ```. The checkpoint from directory ``` log/name_of_experiment/Final_CKPTs/``` corresponding to latest __step index__ would be used for estimating the flow.  
+- **experiment**:  ``` name_of_experiment``` from which to load the checkpoint for evaluation. For example  ```C_KITTI ```. The checkpoint from directory ``` log/name_of_experiment/Final_CKPTs/``` corresponding to latest __step index__ would be used for estimating the flow.  
 - **arch**: ```C``` or ```CS``` or ```CSS```
 - **dataset**: Dataset to evaluate evaluate on, either ```KITTI_2012``` or ```KITTI_2015``` 
 - **dataset_dir**: Path to the directory of the evaluation dataset relative to the base directory of the project. For example (in the cluster) 
@@ -89,6 +89,6 @@ python3 run.py --config_path ./config.ini
 
 - **config_path**: path to **config.ini**. (Dont change the default location, which is ```./config.ini```)
 - **experiment**: name of the experiment for the training session. A directory ```log/name_of_experiment/```will be created for the corresponding experiment 
-- **ckpt_filename**: The name of the files to save the ckeckpoints with. This name is appended by the **global step index** corresponding to the state at which the checkpoint is saved during training. For example the option is set as ```ckpt```, then the checkpoints will be saved as
+- **ckpt_filename**: The name of the files to save the ckeckpoints with. This name is appended by the **global step index** corresponding to the state at which the checkpoint is saved during training. For example, if the option is set as ```ckpt```, then the checkpoints will be saved as
 ```ckpt_500.pytorch, ckpt_1000.pytorch, ckpt_1500.pytorch and so on```.
-- **ow**: Whether to owerwrite the specified **experiment**, if already exists. If set to **True** and if the experiment already exists, it erase the directory corresponding to the specified experiment and restart from **step 0**. If **False**, and if the specified experiment already exists, it will resume the training from the last saved checkpoint state.
+- **ow**: Whether to owerwrite the specified **experiment**, if already exists. If set to **True** and if the experiment already exists, the directory corresponding to the specified experiment will be erased and training will restart from **step 0**. If **False**, and if the specified experiment already exists, it will resume the training from the last saved checkpoint state.
